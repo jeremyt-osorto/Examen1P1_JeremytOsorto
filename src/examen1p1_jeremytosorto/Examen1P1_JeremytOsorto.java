@@ -131,6 +131,31 @@ public class Examen1P1_JeremytOsorto {
         return arr;
     }
     
+    public static int[] mover(int[] arr, int[] arr1, int g){
+        int i, num, j;
+        
+        for (i=0; i<=g-1; i++){
+            int pri=arr[0];
+            for (j=0; j<arr.length-1;j++){
+                arr[j]=arr[j+1];
+            }
+            arr[arr.length-1]=pri;
+        }
+        return arr;
+    }
+    public static int[] mover1(int[] arr, int[] arr1, int g){
+        int i, num, j;
+        
+        for (i=0; i<=g-1; i++){
+            int pri=arr[arr.length-1];
+            for (j=arr.length-1; 0<j;j--){
+                arr[j]=arr[j-1];
+            }
+            arr[0]=pri;
+        }
+        return arr;
+    }
+    
     public static void rotacionCircular(){
         Scanner lee= new Scanner(System.in);
         Scanner le=new Scanner(System.in);
@@ -159,7 +184,21 @@ public class Examen1P1_JeremytOsorto {
             int g=Integer.parseInt(d);
             char t=c.charAt(0);
             
-            System.out.println(g+""+t);
+            switch (t){
+                case 'i':
+                    mover(arr,arr1,g);
+                    break;
+                case 'd':
+                    mover1(arr,arr1,g);
+                    break;
+                default:
+                    System.out.println("Ingrese i o d");
+            }
+            System.out.print("Arreglo después de la rotación: [");
+            for (int i=0; i<arr.length;i++){
+                System.out.print(" "+arr[i]);
+            }
+            System.out.println(" ]");
         }
         else{
             System.out.println("ingrese un valor mayor 5");
@@ -168,13 +207,48 @@ public class Examen1P1_JeremytOsorto {
         
     }
     
+    public static int[] dec2bin(int num, int num1){
+        int y, i;
+        String g, l;
+        int[] lr=new int[8];
+        
+        y=3;
+        g="";
+        while(num!=0 || num!=1){
+            y=num%2;
+            num=num/2;
+            l=Integer.toString(y);
+            g+=l;
+            System.out.println(g);
+        }
+        return lr;
+    }
+    
+    public static void bono(){
+        Scanner nume=new Scanner(System.in);
+        int num, num1;
+        
+        System.out.println("Ingrese dos número los cuales esten en un rango de 0 a 255");
+        System.out.println("Ingrese el primer número: ");
+        num=nume.nextInt();
+        System.out.println("Ingrese el segundo número: ");
+        num1=nume.nextInt();
+        
+        if(num>-1 && num<256 && num1>-1 && num1<256){
+            dec2bin(num,num1);
+        }
+        else{
+            System.out.println("Ingrese dos número los cuales esten en un rango de 0 a 255");
+        }
+    }
+    
     public static void main(String[] args) {
         Scanner scan= new Scanner(System.in);
         int opc;
         
         do{
             System.out.println("Menu: ");
-            System.out.println("1) Descifrar la combinación\n2) Rotación circular del arreglo\n3)Bono: Suma de Binarios\n4) Salir");
+            System.out.println("1) Descifrar la combinación\n2) Rotación circular del arreglo\n3) Bono: Suma de Binarios\n4) Salir");
             opc=scan.nextInt();
             
             switch(opc){
@@ -185,6 +259,7 @@ public class Examen1P1_JeremytOsorto {
                     rotacionCircular();
                     break;
                 case 3:
+                    bono();
                     break;
             }
         }
